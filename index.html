@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran: Pentingnya Sholat - Kelas 7 SMP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Poppins & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spaceDark: '#0B0F19',
+                        spacePurple: '#1E1B4B',
+                        spaceViolet: '#4C1D95',
+                        spaceGold: '#F59E0B',
+                        spaceCyan: '#06B6D4',
+                        spaceCard: '#1E293B'
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0B0F19;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        /* Custom Space Background Animation */
+        .stars-bg {
+            background-image: radial-gradient(white 1px, transparent 0), radial-gradient(rgba(255,255,255,0.5) 1px, transparent 0);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            animation: twinkle 15s linear infinite;
+        }
+        @keyframes twinkle {
+            from { background-position: 0 0, 25px 25px; }
+            to { background-position: 500px 500px, 525px 525px; }
+        }
+        /* Floating Planet Animation */
+        @keyframes floatPlanet {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .animate-float {
+            animation: floatPlanet 6s ease-in-out infinite;
+        }
+        /* Pulse Glow Effect */
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+        }
+        .glow-purple {
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4C1D95;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6D28D9;
+        }
+    </style>
+</head>
+<body class="bg-spaceDark text-slate-100 min-h-screen flex flex-col relative stars-bg">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-spacePurple/90 backdrop-blur-md border-b border-purple-900/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-spaceGold to-purple-600 flex items-center justify-center glow-gold animate-bounce">
+                        <i class="fa-solid fa-mosque text-xl text-white"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold bg-gradient-to-r from-spaceGold via-purple-300 to-spaceCyan bg-clip-text text-transparent">AstralSholat</span>
+                        <p class="text-xs text-slate-400 font-inter">Kelas 7 SMP • Fathimah Az Zahrah</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 bg-purple-600 text-white shadow-md">
+                        <i class="fa-solid fa-house mr-2"></i>Home
+                    </button>
+                    <button onclick="switchTab('tujuan')" id="nav-tujuan" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-300 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-bullseye mr-2"></i>Tujuan
+                    </button>
+                    <button onclick="switchTab('materi')" id="nav-materi" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-300 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-book-open mr-2"></i>Materi
+                    </button>
+                    <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-300 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-gamepad mr-2"></i>Kuis Interaktif
+                    </button>
+                    <button onclick="switchTab('dragdrop')" id="nav-dragdrop" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-300 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-puzzle-piece mr-2"></i>Drag & Drop
+                    </button>
+                    <button onclick="switchTab('tentang')" id="nav-tentang" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-300 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-user-astronaut mr-2"></i>Tentang
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg bg-white/10 text-slate-200 hover:bg-white/20 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-spaceDark/95 border-b border-purple-900 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold bg-purple-600 text-white flex items-center">
+                <i class="fa-solid fa-house w-8"></i> Home
+            </button>
+            <button onclick="switchTab('tujuan'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-white/10 flex items-center">
+                <i class="fa-solid fa-bullseye w-8"></i> Tujuan Pembelajaran
+            </button>
+            <button onclick="switchTab('materi'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-white/10 flex items-center">
+                <i class="fa-solid fa-book-open w-8"></i> Materi
+            </button>
+            <button onclick="switchTab('kuis'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-white/10 flex items-center">
+                <i class="fa-solid fa-gamepad w-8"></i> Kuis Interaktif
+            </button>
+            <button onclick="switchTab('dragdrop'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-white/10 flex items-center">
+                <i class="fa-solid fa-puzzle-piece w-8"></i> Drag and Drop
+            </button>
+            <button onclick="switchTab('tentang'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-white/10 flex items-center">
+                <i class="fa-solid fa-user-astronaut w-8"></i> Tentang
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- TAB 1: HOME -->
+        <section id="tab-home" class="tab-content space-y-12">
+            <!-- Hero Banner -->
+            <div class="relative bg-gradient-to-r from-purple-900/60 via-indigo-950/80 to-blue-950/60 border border-purple-500/30 rounded-3xl p-8 sm:p-12 overflow-hidden shadow-2xl glow-purple">
+                <div class="absolute -right-10 -bottom-10 opacity-20 lg:opacity-40 animate-float pointer-events-none">
+                    <i class="fa-solid fa-globe text-[220px] text-spaceGold"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-spaceGold/20 border border-spaceGold/40 px-4 py-1.5 rounded-full text-spaceGold text-sm font-semibold">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>Media Pembelajaran Interaktif SMP Kelas 7</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                        Jelajahi Makna & <span class="bg-gradient-to-r from-spaceGold to-spaceCyan bg-clip-text text-transparent">Pentingnya Sholat</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg font-inter leading-relaxed">
+                        Selamat datang di petualangan luar angkasa rohani! Mari pelajari bersama mengapa sholat menjadi tiang agama dan cahaya penuntun hidup kita sehari-hari dengan cara yang seru dan menyenangkan.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('materi')" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-bold text-white shadow-lg hover:from-purple-500 hover:to-indigo-500 transition transform hover:-translate-y-1 flex items-center space-x-2">
+                            <span>Mulai Belajar</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('kuis')" class="px-6 py-3.5 rounded-2xl bg-spaceGold/20 border border-spaceGold text-spaceGold font-bold hover:bg-spaceGold/30 transition transform hover:-translate-y-1 flex items-center space-x-2">
+                            <span>Uji Tantangan Kuis</span>
+                            <i class="fa-solid fa-gamepad"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div onclick="switchTab('materi')" class="bg-spaceCard/80 border border-purple-500/20 p-6 rounded-2xl hover:border-spaceGold transition cursor-pointer group space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/30 text-spaceGold flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Materi Menarik</h3>
+                    <p class="text-slate-400 text-sm font-inter">Pahami definisi, dalil, kedudukan sholat, dan hikmahnya dalam kehidupan remaja.</p>
+                </div>
+                <div onclick="switchTab('kuis')" class="bg-spaceCard/80 border border-purple-500/20 p-6 rounded-2xl hover:border-spaceCyan transition cursor-pointer group space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-600/30 text-spaceCyan flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Kuis Interaktif</h3>
+                    <p class="text-slate-400 text-sm font-inter">Uji pemahamanmu lewat kuis pilihan ganda bertema luar angkasa lengkap dengan skor langsung.</p>
+                </div>
+                <div onclick="switchTab('dragdrop')" class="bg-spaceCard/80 border border-purple-500/20 p-6 rounded-2xl hover:border-spaceGold transition cursor-pointer group space-y-4">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-600/30 text-spaceGold flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Drag & Drop Game</h3>
+                    <p class="text-slate-400 text-sm font-inter">Cocokkan rukun, syarat, dan hikmah sholat ke kotak planet yang tepat!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: TUJUAN PEMBELAJARAN -->
+        <section id="tab-tujuan" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-spaceGold text-sm font-semibold tracking-wider uppercase bg-spaceGold/10 px-3 py-1 rounded-full">Capaian Belajar</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Tujuan Pembelajaran</h2>
+                <p class="text-slate-400 text-base font-inter">Setelah mempelajari media interaktif ini, siswa kelas 7 diharapkan mampu mencapai target kompetensi berikut:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="bg-spaceCard/90 border border-purple-500/30 p-6 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/40 text-spaceGold flex items-center justify-center shrink-0 font-bold">1</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white mb-1">Memahami Pengertian & Dalil</h4>
+                        <p class="text-slate-300 text-sm font-inter">Siswa dapat menjelaskan arti sholat secara bahasa dan istilah serta mengetahui dalil kewajibannya dalam Al-Qur'an.</p>
+                    </div>
+                </div>
+                <div class="bg-spaceCard/90 border border-purple-500/30 p-6 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/40 text-spaceGold flex items-center justify-center shrink-0 font-bold">2</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white mb-1">Kedudukan Sholat</h4>
+                        <p class="text-slate-300 text-sm font-inter">Menyadari bahwa sholat adalah tiang agama dan amalan yang pertama kali dihisab di hari kiamat.</p>
+                    </div>
+                </div>
+                <div class="bg-spaceCard/90 border border-purple-500/30 p-6 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/40 text-spaceGold flex items-center justify-center shrink-0 font-bold">3</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white mb-1">Manfaat & Hikmah Sholat</h4>
+                        <p class="text-slate-300 text-sm font-inter">Mengidentifikasi dampak positif sholat terhadap pencegahan perbuatan keji dan mungkar serta kedisiplinan waktu.</p>
+                    </div>
+                </div>
+                <div class="bg-spaceCard/90 border border-purple-500/30 p-6 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/40 text-spaceGold flex items-center justify-center shrink-0 font-bold">4</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-white mb-1">Menerapkan dalam Keseharian</h4>
+                        <p class="text-slate-300 text-sm font-inter">Termotivasi untuk melaksanakan sholat 5 waktu secara istiqomah dan tepat waktu sebagai remaja Muslim yang taat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: MATERI -->
+        <section id="tab-materi" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-spaceCyan text-sm font-semibold tracking-wider uppercase bg-spaceCyan/10 px-3 py-1 rounded-full">Modul Pembelajaran</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Materi Pentingnya Sholat</h2>
+                <p class="text-slate-400 text-base font-inter">Pilih topik materi di bawah ini untuk mulai menjelajah ilmu pengetahuan agama.</p>
+            </div>
+
+            <!-- Materi Sub-tabs/Buttons -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="showMateri(1)" id="btn-materi-1" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-purple-600 text-white shadow">1. Definisi & Dalil</button>
+                <button onclick="showMateri(2)" id="btn-materi-2" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-spaceCard text-slate-300 hover:bg-white/10">2. Tiang Agama</button>
+                <button onclick="showMateri(3)" id="btn-materi-3" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-spaceCard text-slate-300 hover:bg-white/10">3. Hikmah & Manfaat</button>
+                <button onclick="showMateri(4)" id="btn-materi-4" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-spaceCard text-slate-300 hover:bg-white/10">4. Ancaman Meninggalkan</button>
+            </div>
+
+            <!-- Materi Content Box -->
+            <div id="materi-box" class="bg-spaceCard/90 border border-purple-500/30 p-8 rounded-3xl max-w-4xl mx-auto space-y-6 shadow-xl">
+                <!-- Content will be injected via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 4: KUIS INTERAKTIF -->
+        <section id="tab-kuis" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-spaceGold text-sm font-semibold tracking-wider uppercase bg-spaceGold/10 px-3 py-1 rounded-full">Tantangan Galaksi</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Kuis Interaktif Sholat</h2>
+                <p class="text-slate-400 text-base font-inter">Jawab 5 pertanyaan berikut dengan tepat untuk membuktikan pemahamanmu!</p>
+            </div>
+
+            <div id="quiz-container" class="bg-spaceCard/90 border border-purple-500/30 p-8 rounded-3xl max-w-3xl mx-auto space-y-6 shadow-xl">
+                <!-- Quiz state active -->
+                <div id="quiz-question-wrapper">
+                    <div class="flex justify-between items-center text-sm text-slate-400 mb-4 font-inter">
+                        <span id="quiz-progress-text">Pertanyaan 1 dari 5</span>
+                        <span id="quiz-score-badge" class="bg-spaceGold/20 text-spaceGold px-3 py-1 rounded-full font-bold">Skor: 0</span>
+                    </div>
+                    <h3 id="quiz-question-title" class="text-xl sm:text-2xl font-bold text-white mb-6">Pertanyaan dimuat...</h3>
+                    <div id="quiz-options-list" class="space-y-3">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Quiz finished state -->
+                <div id="quiz-result-wrapper" class="hidden text-center space-y-6 py-8">
+                    <div class="w-20 h-20 bg-spaceGold/20 text-spaceGold rounded-full flex items-center justify-center mx-auto text-4xl glow-gold animate-bounce">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-white">Misi Kuis Selesai!</h3>
+                    <p id="quiz-final-score-text" class="text-lg text-slate-300 font-inter">Skor akhir kamu: 0 dari 5</p>
+                    <p id="quiz-feedback-msg" class="text-spaceCyan font-medium font-inter"></p>
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold rounded-2xl shadow-lg hover:from-purple-500 hover:to-indigo-500 transition">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Ulangi Kuis
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: DRAG AND DROP -->
+        <section id="tab-dragdrop" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-spaceGold text-sm font-semibold tracking-wider uppercase bg-spaceGold/10 px-3 py-1 rounded-full">Mini Game Edukasi</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Drag & Drop: Cocokan Pilar Sholat</h2>
+                <p class="text-slate-400 text-base font-inter">Tarik atau klik pernyataan konsep sholat ke kategori planet yang tepat!</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Items Pool -->
+                <div class="bg-spaceCard/80 border border-purple-500/30 p-6 rounded-2xl">
+                    <h4 class="text-sm font-bold text-spaceGold uppercase tracking-wider mb-4"><i class="fa-solid fa-meteor mr-2"></i>Pernyataan Konsep (Klik/Pilih target atau Drag):</h4>
+                    <div id="drag-items-pool" class="flex flex-wrap gap-3 min-h-[60px] items-center">
+                        <!-- Items populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Drop Zones (Planets) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Zone 1 -->
+                    <div class="drop-zone bg-indigo-950/40 border-2 border-dashed border-indigo-500/50 p-6 rounded-3xl flex flex-col items-center text-center space-y-4 transition" data-category="rukun">
+                        <div class="w-16 h-16 rounded-full bg-indigo-600/30 text-indigo-400 flex items-center justify-center text-3xl animate-float">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Rukun / Syarat Sholat</h3>
+                        <p class="text-xs text-slate-400 font-inter">Hal yang wajib ada di dalam sholat</p>
+                        <div class="drop-target-slot w-full min-h-[90px] bg-spaceDark/50 rounded-xl p-3 border border-indigo-900/50 flex flex-col gap-2 justify-center items-center">
+                            <span class="text-xs text-slate-500 italic">Letakkan di sini</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone 2 -->
+                    <div class="drop-zone bg-purple-950/40 border-2 border-dashed border-purple-500/50 p-6 rounded-3xl flex flex-col items-center text-center space-y-4 transition" data-category="hikmah">
+                        <div class="w-16 h-16 rounded-full bg-purple-600/30 text-purple-400 flex items-center justify-center text-3xl animate-float" style="animation-delay: 1s;">
+                            <i class="fa-solid fa-ring"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Hikmah & Manfaat</h3>
+                        <p class="text-xs text-slate-400 font-inter">Dampak positif sholat bagi diri</p>
+                        <div class="drop-target-slot w-full min-h-[90px] bg-spaceDark/50 rounded-xl p-3 border border-purple-900/50 flex flex-col gap-2 justify-center items-center">
+                            <span class="text-xs text-slate-500 italic">Letakkan di sini</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone 3 -->
+                    <div class="drop-zone bg-amber-950/40 border-2 border-dashed border-amber-500/50 p-6 rounded-3xl flex flex-col items-center text-center space-y-4 transition" data-category="kedudukan">
+                        <div class="w-16 h-16 rounded-full bg-amber-600/30 text-amber-400 flex items-center justify-center text-3xl animate-float" style="animation-delay: 2s;">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Kedudukan Sholat</h3>
+                        <p class="text-xs text-slate-400 font-inter">Posisi agung sholat dalam Islam</p>
+                        <div class="drop-target-slot w-full min-h-[90px] bg-spaceDark/50 rounded-xl p-3 border border-amber-900/50 flex flex-col gap-2 justify-center items-center">
+                            <span class="text-xs text-slate-500 italic">Letakkan di sini</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drag Drop Action & Status -->
+                <div class="text-center space-y-4">
+                    <p id="drag-status-msg" class="text-sm font-semibold text-spaceCyan"></p>
+                    <button onclick="resetDragDrop()" class="px-6 py-2.5 bg-white/10 hover:bg-white/20 text-slate-200 font-semibold rounded-xl text-sm transition">
+                        <i class="fa-solid fa-rotate-right mr-2"></i>Reset Permainan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: TENTANG -->
+        <section id="tab-tentang" class="tab-content hidden space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-spaceGold text-sm font-semibold tracking-wider uppercase bg-spaceGold/10 px-3 py-1 rounded-full">Profil Pembuat</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Tentang Pengembang</h2>
+                <p class="text-slate-400 text-base font-inter">Mengenal lebih dekat kreator di balik media pembelajaran interaktif luar angkasa ini.</p>
+            </div>
+
+            <div class="bg-spaceCard/90 border border-purple-500/30 p-8 sm:p-12 rounded-3xl max-w-2xl mx-auto text-center space-y-6 shadow-xl">
+                <div class="w-28 h-28 mx-auto rounded-full bg-gradient-to-tr from-spaceGold via-purple-600 to-spaceCyan flex items-center justify-center text-5xl text-white glow-gold animate-float">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-extrabold text-white">Fathimah Az Zahrah</h3>
+                    <p class="text-spaceGold font-medium">Guru Pendidik & Pengembang Media Pembelajaran SMP Kelas 7</p>
+                </div>
+                <hr class="border-purple-900/50 my-4">
+                <p class="text-slate-300 font-inter text-sm leading-relaxed">
+                    Media pembelajaran interaktif ini dirancang khusus untuk siswa Sekolah Menengah Pertama (SMP) Kelas 7 agar proses belajar mengenai pentingnya sholat menjadi lebih menyenangkan, interaktif, dan mudah dipahami dengan pendekatan visual antarbintang.
+                </p>
+                <div class="pt-4 flex justify-center space-x-4">
+                    <div class="bg-spaceDark/60 px-4 py-2 rounded-xl border border-purple-900/50 text-xs text-slate-400">
+                        <i class="fa-solid fa-school text-spaceCyan mr-1"></i> SMP Kelas 7
+                    </div>
+                    <div class="bg-spaceDark/60 px-4 py-2 rounded-xl border border-purple-900/50 text-xs text-slate-400">
+                        <i class="fa-solid fa-book text-spaceGold mr-1"></i> Pendidikan Agama Islam
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-spacePurple/50 border-t border-purple-900/40 py-6 text-center text-xs text-slate-400 font-inter">
+        <p>&copy; 2026 AstralSholat • Dikembangkan oleh <span class="text-spaceGold font-semibold">Fathimah Az Zahrah</span> untuk Siswa SMP Kelas 7.</p>
+    </footer>
+
+    <!-- Custom Notification/Message Modal (Replaces alert) -->
+    <div id="custom-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-spaceCard border border-purple-500/40 p-6 rounded-3xl max-w-sm w-full text-center space-y-4 shadow-2xl">
+            <div id="modal-icon" class="w-14 h-14 rounded-full bg-spaceGold/20 text-spaceGold flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h4 id="modal-title" class="text-xl font-bold text-white">Pemberitahuan</h4>
+            <p id="modal-message" class="text-slate-300 text-sm font-inter">Pesan informasi di sini.</p>
+            <button onclick="closeModal()" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl transition">
+                Mengerti
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* --- 1. NAVIGATION & TAB SWITCHING SYSTEM --- */
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            // Show selected tab
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+
+            // Update desktop navigation buttons style
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-300', 'hover:bg-white/10', 'hover:text-white');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-300', 'hover:bg-white/10', 'hover:text-white');
+                activeBtn.classList.add('bg-purple-600', 'text-white', 'shadow-md');
+            }
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars text-xl";
+            } else {
+                icon.className = "fa-solid fa-xmark text-xl";
+            }
+        }
+
+        /* --- 2. MATERI DATA & INTERACTION --- */
+        const materiData = {
+            1: {
+                title: "1. Definisi & Dalil Sholat",
+                subtitle: "Fondasi Utama Ibadah Muslim",
+                content: `
+                    <div class="space-y-4 font-inter text-slate-300">
+                        <p>Secara bahasa (etimologi), kata <strong>Sholat</strong> berarti <strong>doa</strong> atau memohon kebaikan. Sedangkan menurut istilah syariat (terminologi), sholat adalah serangkaian ucapan dan perbuatan tertentu yang diawali dengan takbiratul ihram dan diakhiri dengan salam, dengan syarat dan rukun tertentu.</p>
+                        <div class="bg-purple-950/40 border border-purple-500/30 p-4 rounded-2xl">
+                            <h4 class="text-white font-bold mb-2 flex items-center"><i class="fa-solid fa-book-quran text-spaceGold mr-2"></i> Dalil Kewajiban Sholat:</h4>
+                            <p class="italic text-slate-200">"Dan dirikanlah sholat, tunaikanlah zakat, dan ruku'lah beserta orang-orang yang ruku'." (QS. Al-Baqarah: 43)</p>
+                        </div>
+                        <p>Sebagai siswa kelas 7 SMP, menegakkan sholat lima waktu sehari semalam (Subuh, Dzuhur, Ashar, Maghrib, dan Isya) adalah kewajiban mutlak yang tidak boleh ditinggalkan dalam keadaan apa pun.</p>
+                    </div>
+                `
+            },
+            2: {
+                title: "2. Sholat sebagai Tiang Agama",
+                subtitle: "Metafora Kokohnya Keimanan Seseorang",
+                content: `
+                    <div class="space-y-4 font-inter text-slate-300">
+                        <p>Rasulullah SAW bersabda bahwa <em>"Sholat itu adalah tiang agama (Islam), barangsiapa mendirikannya maka ia telah menegakkan agama, dan barangsiapa merobohkannya maka ia telah merobohkan agama."</em></p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-spaceDark/60 p-4 rounded-xl border border-purple-900/50">
+                                <h5 class="text-white font-bold mb-1"><i class="fa-solid fa-shield-halved text-spaceCyan mr-2"></i> Amalan Pertama Dihisab</h5>
+                                <p class="text-xs text-slate-400">Di hari kiamat kelak, hisab (perhitungan) amal manusia yang pertama kali diperiksa adalah sholatnya.</p>
+                            </div>
+                            <div class="bg-spaceDark/60 p-4 rounded-xl border border-purple-900/50">
+                                <h5 class="text-white font-bold mb-1"><i class="fa-solid fa-star text-spaceGold mr-2"></i> Pembeda Muslim</h5>
+                                <p class="text-xs text-slate-400">Sholat menjadi garis pemisah yang jelas antara seorang mukmin yang taat dengan keimanan sejati.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                title: "3. Hikmah & Manfaat Sholat",
+                subtitle: "Dampak Positif bagi Remaja SMP",
+                content: `
+                    <div class="space-y-4 font-inter text-slate-300">
+                        <p>Sholat bukan sekadar rutinitas fisik, melainkan sarana komunikasi langsung antara hamba dengan Sang Pencipta. Manfaat utamanya meliputi:</p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-200">
+                            <li><strong>Mencegah Perbuatan Keji dan Mungkar:</strong> Sebagaimana firman Allah dalam QS. Al-Ankabut: 45 bahwa sesungguhnya sholat mencegah dari (perbuatan-perbuatan) keji dan mungkar.</li>
+                            <li><strong>Melatih Kedisiplinan Waktu:</strong> Jadwal sholat yang tetap mengajarkan remaja SMP untuk mengatur waktu belajar, istirahat, dan aktivitas harian dengan disiplin.</li>
+                            <li><strong>Ketenangan Jiwa (Thuma'ninah):</strong> Mengurangi stres akademik remaja karena senantiasa bersandar kepada Allah SWT.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            4: {
+                title: "4. Ancaman Meninggalkan Sholat",
+                subtitle: "Peringatan Tegas bagi yang Melalaikan",
+                content: `
+                    <div class="space-y-4 font-inter text-slate-300">
+                        <p>Kelalaian dalam menunaikan sholat mendatangkan kerugian besar baik di dunia maupun di akhirat. Allah SWT berfirman mengenai penghuni neraka Saqar:</p>
+                        <div class="bg-amber-950/30 border border-amber-500/30 p-4 rounded-2xl">
+                            <p class="italic text-slate-200">"Apakah yang memasukkan kamu ke dalam Saqar (neraka)? Mereka menjawab: 'Kami dahulu tidak termasuk orang-orang yang mengerjakan sholat'." (QS. Al-Muddatstsir: 42-43)</p>
+                        </div>
+                        <p>Oleh karena itu, mari jadikan sholat sebagai kebutuhan utama penyejuk hati setiap hari.</p>
+                    </div>
+                `
+            }
+        };
+
+        function showMateri(id) {
+            // Update buttons style
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById('btn-materi-' + i);
+                if (i === id) {
+                    btn.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-purple-600 text-white shadow";
+                } else {
+                    btn.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-spaceCard text-slate-300 hover:bg-white/10";
+                }
+            }
+
+            // Render content
+            const box = document.getElementById('materi-box');
+            const data = materiData[id];
+            box.innerHTML = `
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-bold text-white">${data.title}</h3>
+                    <p class="text-spaceGold text-sm font-inter">${data.subtitle}</p>
+                </div>
+                <hr class="border-purple-900/50">
+                ${data.content}
+            `;
+        }
+
+        // Initialize first materi on load
+        document.addEventListener("DOMContentLoaded", function() {
+            showMateri(1);
+            initQuiz();
+            initDragDrop();
+        });
+
+        /* --- 3. QUIZ INTERAKTIF LOGIC --- */
+        const quizQuestions = [
+            {
+                question: "Apa arti kata 'Sholat' secara bahasa (etimologi)?",
+                options: ["Doa / Memohon kebaikan", "Puasa di siang hari", "Membaca Al-Qur'an", "Bersedekah kepada fakir"],
+                answer: 0
+            },
+            {
+                question: "Dalam hadits, sholat diibaratkan sebagai apa bagi agama Islam?",
+                options: ["Atap bangunan", "Pintu gerbang", "Tiang agama", "Pondasi rumah"],
+                answer: 2
+            },
+            {
+                question: "Surat dan ayat berapa yang menjelaskan bahwa sholat mencegah perbuatan keji dan mungkar?",
+                options: ["QS. Al-Baqarah: 43", "QS. Al-Ankabut: 45", "QS. Al-Muddatstsir: 42", "QS. An-Nisa: 103"],
+                answer: 1
+            },
+            {
+                question: "Amalan apakah yang pertama kali dihisab (dihitung) dari seorang hamba di hari kiamat?",
+                options: ["Puasa Ramadhan", "Zakat harta", "Sholat", "Berbakti pada orang tua"],
+                answer: 2
+            },
+            {
+                question: "Berapa jumlah kewajiban sholat fardhu dalam sehari semalam?",
+                options: ["3 waktu", "4 waktu", "5 waktu", "6 waktu"],
+                answer: 2
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let userScore = 0;
+
+        function initQuiz() {
+            currentQuizIndex = 0;
+            userScore = 0;
+            document.getElementById('quiz-question-wrapper').classList.remove('hidden');
+            document.getElementById('quiz-result-wrapper').classList.add('hidden');
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            if (currentQuizIndex >= quizQuestions.length) {
+                showQuizResults();
+                return;
+            }
+
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `Pertanyaan ${currentQuizIndex + 1} dari ${quizQuestions.length}`;
+            document.getElementById('quiz-score-badge').innerText = `Skor: ${userScore}`;
+            document.getElementById('quiz-question-title').innerText = q.question;
+
+            const optionsList = document.getElementById('quiz-options-list');
+            optionsList.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-2xl bg-spaceDark/80 border border-purple-500/20 hover:border-spaceGold hover:bg-purple-950/30 font-inter text-slate-200 transition flex items-center justify-between group";
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 text-spaceGold transition"></i>`;
+                btn.onclick = () => selectQuizAnswer(idx);
+                optionsList.appendChild(btn);
+            });
+        }
+
+        function selectQuizAnswer(selectedIndex) {
+            const q = quizQuestions[currentQuizIndex];
+            if (selectedIndex === q.answer) {
+                userScore += 1;
+                showCustomModal("Jawaban Benar!", "Hebat sekali! Pemahamanmu sangat luar biasa.", "success");
+            } else {
+                showCustomModal("Kurang Tepat", `Jawaban yang benar adalah: ${q.options[q.answer]}`, "error");
+            }
+
+            currentQuizIndex++;
+            loadQuizQuestion();
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-question-wrapper').classList.add('hidden');
+            document.getElementById('quiz-result-wrapper').classList.remove('hidden');
+            document.getElementById('quiz-final-score-text').innerText = `Skor akhir kamu: ${userScore} dari ${quizQuestions.length}`;
+            
+            const feedbackMsg = document.getElementById('quiz-feedback-msg');
+            if (userScore === 5) {
+                feedbackMsg.innerText = "Luar biasa! Kamu adalah astronot teladan yang sangat menguasai materi sholat!";
+            } else if (userScore >= 3) {
+                feedbackMsg.innerText = "Bagus sekali! Pertahankan semangat belajarmu ya.";
+            } else {
+                feedbackMsg.innerText = "Ayo baca ulang materinya agar pemahamanmu semakin mantap!";
+            }
+        }
+
+        function restartQuiz() {
+            initQuiz();
+        }
+
+        /* --- 4. DRAG AND DROP MINI GAME LOGIC --- */
+        const dragItemsData = [
+            { id: 1, text: "Takbiratul Ihram", category: "rukun" },
+            { id: 2, text: "Mencegah perbuatan keji & mungkar", category: "hikmah" },
+            { id: 3, text: "Tiang agama Islam", category: "kedudukan" },
+            { id: 4, text: "Membaca surat Al-Fatihah", category: "rukun" },
+            { id: 5, text: "Melatih disiplin waktu", category: "hikmah" },
+            { id: 6, text: "Amalan pertama dihisab", category: "kedudukan" }
+        ];
+
+        function initDragDrop() {
+            renderDragPool();
+            setupDropZones();
+            document.getElementById('drag-status-msg').innerText = "Klik atau tarik item ke kategori planet yang sesuai!";
+        }
+
+        function renderDragPool() {
+            const pool = document.getElementById('drag-items-pool');
+            pool.innerHTML = '';
+
+            // Shuffle or list unassigned items
+            dragItemsData.forEach(item => {
+                // Check if already placed
+                if (!item.placed) {
+                    const el = document.createElement('div');
+                    el.className = "px-4 py-2.5 rounded-xl bg-spacePurple border border-purple-500/40 text-sm font-inter font-medium text-slate-200 cursor-pointer hover:border-spaceGold transition flex items-center space-x-2 shadow";
+                    el.innerHTML = `<i class="fa-solid fa-grip-vertical text-xs text-spaceGold"></i><span>${item.text}</span>`;
+                    
+                    // Simple click-to-place helper for touch devices or ease of use
+                    el.onclick = () => promptCategorySelection(item.id);
+                    pool.appendChild(el);
+                }
+            });
+
+            // Check if game complete
+            const remaining = dragItemsData.filter(i => !i.placed).length;
+            if (remaining === 0) {
+                document.getElementById('drag-status-msg').innerHTML = "<span class='text-spaceGold font-bold'>🎉 Selamat! Semua konsep berhasil dikelompokkan dengan benar!</span>";
+            }
+        }
+
+        function setupDropZones() {
+            const zones = document.querySelectorAll('.drop-zone');
+            zones.forEach(zone => {
+                const cat = zone.getAttribute('data-category');
+                const slot = zone.querySelector('.drop-target-slot');
+                
+                // Render placed items in this zone
+                slot.innerHTML = '';
+                const placedInCat = dragItemsData.filter(i => i.placed === cat);
+                
+                if (placedInCat.length === 0) {
+                    slot.innerHTML = `<span class="text-xs text-slate-500 italic">Letakkan di sini</span>`;
+                } else {
+                    placedInCat.forEach(item => {
+                        const badge = document.createElement('div');
+                        badge.className = "w-full bg-spaceCard border border-purple-500/30 px-3 py-1.5 rounded-lg text-xs font-inter text-spaceCyan flex items-center justify-between";
+                        badge.innerHTML = `<span>${item.text}</span> <button onclick="unplaceItem(${item.id})" class="text-red-400 hover:text-red-300 ml-2"><i class="fa-solid fa-xmark"></i></button>`;
+                        slot.appendChild(badge);
+                    });
+                }
+            });
+        }
+
+        function promptCategorySelection(itemId) {
+            const item = dragItemsData.find(i => i.id === itemId);
+            // Interactive modal prompt for touch/click placement
+            const categories = [
+                { key: 'rukun', name: 'Rukun / Syarat Sholat' },
+                { key: 'hikmah', name: 'Hikmah & Manfaat' },
+                { key: 'kedudukan', name: 'Kedudukan Sholat' }
+            ];
+
+            let html = `<p class="text-sm text-slate-300 mb-4 font-inter">Pilih kategori planet untuk: <br><strong class="text-spaceGold">"${item.text}"</strong></p><div class="space-y-2">`;
+            categories.forEach(c => {
+                html += `<button onclick="assignCategory(${item.id}, '${c.key}')" class="w-full py-2.5 bg-purple-950/60 border border-purple-500/40 hover:bg-purple-900 rounded-xl text-sm font-semibold text-white transition">${c.name}</button>`;
+            });
+            html += `</div>`;
+
+            showCustomModal("Pilih Planet Tujuan", html, "custom");
+        }
+
+        function assignCategory(itemId, categoryKey) {
+            const item = dragItemsData.find(i => i.id === itemId);
+            if (item.category === categoryKey) {
+                item.placed = categoryKey;
+                showCustomModal("Benar!", `Pernyataan masuk ke kategori yang tepat.`, "success");
+            } else {
+                showCustomModal("Kurang Tepat", `Kurang tepat, coba masukkan ke planet kategori lainnya.`, "error");
+            }
+            renderDragPool();
+            setupDropZones();
+        }
+
+        function unplaceItem(itemId) {
+            const item = dragItemsData.find(i => i.id === itemId);
+            item.placed = null;
+            renderDragPool();
+            setupDropZones();
+        }
+
+        function resetDragDrop() {
+            dragItemsData.forEach(i => i.placed = null);
+            initDragDrop();
+        }
+
+        /* --- 5. CUSTOM MODAL HELPER --- */
+        function showCustomModal(title, message, type) {
+            const modal = document.getElementById('custom-modal');
+            const titleEl = document.getElementById('modal-title');
+            const msgEl = document.getElementById('modal-message');
+            const iconEl = document.getElementById('modal-icon');
+
+            titleEl.innerText = title;
+            if (type === "custom") {
+                msgEl.innerHTML = message;
+                iconEl.innerHTML = '<i class="fa-solid fa-puzzle-piece text-spaceGold"></i>';
+            } else {
+                msgEl.innerText = message;
+                if (type === "success") {
+                    iconEl.innerHTML = '<i class="fa-solid fa-circle-check text-green-400"></i>';
+                } else {
+                    iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i>';
+                }
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
